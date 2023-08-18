@@ -14,7 +14,7 @@ def pytest_addoption(parser):
     )
 
     parser.addoption(
-        "--url", default="http://192.168.0.101:8081"
+        "--url", required=True
     )
 
 
