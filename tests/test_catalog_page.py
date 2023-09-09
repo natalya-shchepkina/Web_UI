@@ -1,19 +1,21 @@
-from selenium.webdriver.common.by import By
+from page_objects.CatalogPage import CatalogPage
+from page_objects.elemets.TopMenu import TopMenu
 
 
 def test_catalog(browser):
-    browser.get(browser.url + "/desktops")
-    browser.find_element(By.ID, "compare-total")
-    browser.find_element(By.XPATH, "//*[@class='col-sm-6 text-right']")
-    browser.find_element(By.ID, "input-sort")
-    browser.find_element(By.XPATH, "//*[@class='product-thumb']")
-    browser.find_element(By.CSS_SELECTOR, "div.caption > p.price")
+    TopMenu(browser).go_to_directory()
+    CatalogPage(browser).verify_add_to_cart_button()
+    CatalogPage(browser).verify_limit_imput()
+    CatalogPage(browser).verify_price()
+    CatalogPage(browser).verify_product_compare()
+    CatalogPage(browser).verify_sort_input()
 
 
 def test_currency_change_catalog(browser):
-    browser.get(browser.url)
-    browser.find_element(By.XPATH, "//*[@class='btn btn-link dropdown-toggle']").click()
-    browser.find_element(By.XPATH, "//*[@class='currency-select btn btn-link btn-block']").click()
-    browser.find_element(By.LINK_TEXT, 'Cameras').click()
-    browser.find_element(By.XPATH, "//p[contains(.,'€')]")
+    TopMenu(browser).choice_currency()
+    selected_currency = TopMenu(browser).get_currency_name()
+    TopMenu(browser).go_to_directory()
+    product_price = CatalogPage(browser).get_product_price()
+    assert selected_currency[0] in product_price
+
 
