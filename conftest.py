@@ -1,11 +1,8 @@
-
 import pytest
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from selenium.webdriver.firefox.service import Service as FFService
-from selenium.webdriver.edge.service import Service as EdgeService
-from selenium.webdriver.safari.service import Service as SafariService
 
 
 def pytest_addoption(parser):
@@ -14,7 +11,7 @@ def pytest_addoption(parser):
     )
 
     parser.addoption(
-        "--url", required=True
+        "--url",  required=True
     )
 
 
@@ -40,3 +37,7 @@ def browser(request):
     driver.url = url
 
     return driver
+
+
+
+

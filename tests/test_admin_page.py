@@ -1,20 +1,21 @@
-from selenium.webdriver.common.by import By
+from page_objects.AdminPage import AdminPage
+from page_objects.LoginPage import LoginPage
+from page_objects.elemets.AdminMenu import AdminMenu
 
 
-def test_admin_page(browser):
-    browser.get(browser.url + "/admin")
-    browser.find_element(By.ID, "input-username")
-    browser.find_element(By.ID, "input-password")
-    browser.find_element(By.LINK_TEXT, "Forgotten Password")
-    browser.find_element(By.XPATH, "//*[@class='btn btn-primary']")
-    browser.find_element(By.CSS_SELECTOR, "#footer > a")
+def test_create_new_product(browser):
+    LoginPage(browser).authorization(browser.url)
+    AdminMenu(browser).go_to_products_catalog()
+    AdminPage(browser).add_new_product()
+
+    assert AdminPage(browser).verify_success_alert()
 
 
-def test_user_login(browser):
-    browser.get(browser.url + "/admin")
-    browser.find_element(By.ID, "input-username").send_keys("user")
-    browser.find_element(By.ID, "input-password").send_keys("bitnami")
-    browser.find_element(By.XPATH, "//*[@class='btn btn-primary']").click()
-    browser.find_element(By.XPATH, "//*[@class='fa fa-sign-out']").click()
+def test_delete_product(browser):
+    LoginPage(browser).authorization(browser.url)
+    AdminMenu(browser).go_to_products_catalog()
+    AdminPage(browser).add_new_product()
+    AdminPage(browser).delete_product()
+    AdminPage(browser).verify_success_alert()
 
-
+    assert AdminPage(browser).verify_success_alert()

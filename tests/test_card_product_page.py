@@ -1,10 +1,13 @@
-from selenium.webdriver.common.by import By
+import random
+
+from page_objects.CardProductPage import CardProductPage
+from page_objects.MainPage import MainPage
 
 
 def test_card_product(browser):
-    browser.get(browser.url + "/desktops/htc-touch-hd")
-    browser.find_element(By.ID, "button-cart")
-    browser.find_element(By.ID, "input-quantity")
-    browser.find_element(By.ID, "product")
-    browser.find_element(By.XPATH, "//*[@class='rating']")
-    browser.find_element(By.XPATH, "//*[@class='btn-group']")
+    MainPage(browser).click_in_card_product(random.randint(0, 3))
+    CardProductPage(browser).verify_add_to_cart_button()
+    CardProductPage(browser).verify_compare_product_button()
+    CardProductPage(browser).verify_wishlist_button()
+    CardProductPage(browser).verify_quantity_input()
+    CardProductPage(browser).verify_thumbnail()
