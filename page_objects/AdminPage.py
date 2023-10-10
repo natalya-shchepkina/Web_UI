@@ -8,7 +8,7 @@ class AdminPage(BasePage):
     ADD_BUTTON = (By.XPATH, "//*[@class='pull-right']/a")
     SAVE_BUTTON = (By.XPATH, "//*[@class='pull-right']/button")
     DELETE_BUTTON = (By.XPATH, "//*[@data-original-title='Delete']")
-    SUCCESS_ALERT = (By.CSS_SELECTOR, ".alert-successeyht")
+    SUCCESS_ALERT = (By.CSS_SELECTOR, ".alert-success")
 
     # product form
     TAB_DATA = (By.XPATH, "//a[contains(.,'Data')]")
