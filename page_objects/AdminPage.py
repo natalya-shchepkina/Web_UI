@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.BasePage import BasePage
@@ -18,7 +19,9 @@ class AdminPage(BasePage):
     # product list
     TABLE_CHECKBOX = (By.XPATH, "//td[contains(.,'name')]/../td")
 
+    @allure.step("Add new product")
     def add_new_product(self):
+        self.logger.debug("%s: Add new product" % self.class_name)
         self._click(self.ADD_BUTTON)
         self._input(self.PRODUCT_NAME_INPUT, "name")
         self._input(self.PRODUCT_META_TITLE, "name")
@@ -29,7 +32,9 @@ class AdminPage(BasePage):
     def verify_success_alert(self):
         return self._element(self.SUCCESS_ALERT)
 
+    @allure.step("Delete product")
     def delete_product(self):
+        self.logger.debug("%s: Delete product" % self.class_name)
         self._click(self.TABLE_CHECKBOX)
         self._click(self.DELETE_BUTTON)
         self.driver.switch_to.alert.accept()

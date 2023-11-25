@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from page_objects.BasePage import BasePage
@@ -15,7 +16,9 @@ class LoginPage(BasePage):
     def open(self, url):
         self.driver.get(url + self.PATH)
 
+    @allure.step("Authorization")
     def authorization(self, url):
+        self.logger.debug("%s: User authorization: %s" % (self.class_name, self.USER))
         self.open(url)
         self._input(self.INPUT_USERNAME, self.USER)
         self._input(self.INPUT_PASSWORD, self.PASSWORD)

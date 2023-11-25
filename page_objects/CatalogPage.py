@@ -13,7 +13,7 @@ class CatalogPage(BasePage):
     def verify_product_compare(self):
         self._element(self.PRODUCT_COMPARE_LINK)
 
-    def verify_limit_imput(self):
+    def verify_limit_input(self):
         self._element(self.LIMIT_INPUT)
 
     def verify_sort_input(self):

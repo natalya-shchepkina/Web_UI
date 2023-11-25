@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from data.user_data import User
@@ -30,7 +31,9 @@ class RegisterPage(BasePage):
         self._element(self.PRIVACY_POLICY_CHECKBOX)
         self._element(self.CONTINUE_BUTTON)
 
+    @allure.step("Register user")
     def register_user(self):
+        self.logger.debug("%s: User registration: %s %s" % (self.class_name, User.first_name, User.last_name))
         self._input(self.FIRSTNAME_INPUT, User.first_name)
         self._input(self.LASTNAME_INPUT, User.last_name)
         self._input(self.EMAIL_INPUT, User.email)
